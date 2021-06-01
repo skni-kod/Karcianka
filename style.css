@@ -1,0 +1,22 @@
+body
+{
+	background-image: url(img/table.jpg);
+	background-position: center;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+}
+
+.play a:hover img
+{
+opacity: .5;
+}
+
+.instruction a:hover img
+{
+opacity: .5;
+}
+
+.authors a:hover img
+{
+opacity: .5;
+}
