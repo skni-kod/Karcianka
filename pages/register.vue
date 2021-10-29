@@ -30,15 +30,17 @@
 <script>
 export default {
     methods:{
-        regisetUser(e){
+        registerUser(e){
             e.preventDefault();
+
             let username = false, email = false, password = false, confirmPassword = false, terms = false;
 
-            if(/^[A-Za-z]$/.test(document.querySelector("[name='username']").value)) username = true;
-            if(/\w/.test(document.querySelector("[name='email']").value)) email = true;
-            if(/^+[A-Za-z0-9]$]/.test(document.querySelector("[name='password']").value)) password = true;
-            if(document.querySelector("[name='password']").value === document.querySelector("[name='confirmPassword']").value) confirmPassword = true;
-            if(document.querySelector('.regChechbox').checked) terms=true;
+            if(/^[A-Za-z0-9-_]{4,15}$/.test(document.querySelector("[name='username']").value)) username = true;
+            if(/^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$^&*-]).{8,30}$/.test(document.querySelector("[name='password']").value)) password = true;
+            if(document.querySelector("[name='password']").value ===document.querySelector("[name='confirmPassword']").value) confirmPassword = true;  
+            terms = document.querySelector("[name='terms']").checked;
+
+            console.log(username,password,confirmPassword,terms);
 
             if(username && email && password && confirmPassword && terms){
                 try{
@@ -93,7 +95,7 @@ export default {
                 width: 100%;
                 border: none;
                 text-align: center;
-                margin: .5em auto;
+                margin: 1em auto;
             }
 
             .registerField{

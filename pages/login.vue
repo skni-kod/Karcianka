@@ -23,23 +23,13 @@ export default {
     methods:{
         loginUser(e){
             e.preventDefault();
-            let username = false;
-            let password = false;
 
-            if(/^[A-Za-z]$/.test(document.querySelector("[name='username']").value)) username=true;
-            if(/^[A-Za-z0-9]$/.test(document.querySelector("[name='password']"))) password=true;
-            
-            console.log(username,password);
-
-            if(username && password){
-                try{
+            try{
                     
-                }catch(err){
-                    console.log(err);
-                }
-            }else{
-                alert('Niepoprawne dane!');
+            }catch(err){
+                console.log(err);
             }
+
         }
     }
 }
@@ -82,7 +72,31 @@ export default {
                 width: 100%;
                 border: none;
                 text-align: center;
-                margin: .5em auto;
+                margin: 1em auto;
+            }
+
+            fieldset::before{
+                content: '';
+                position: absolute;
+                display: block;
+                left: 24.7%;
+                bottom: -.3em;
+                height: 3.2em;
+                width: 49.5%;
+                border: .3em solid rgb(43, 255, 0);
+                border-color: rgb(43, 255, 0) transparent rgb(43, 255, 0) transparent;
+            }
+
+            fieldset::after{
+                content: '';
+                position: absolute;
+                display: block;
+                left: 24%;
+                bottom: -.3em;
+                height: 3.2em;
+                width: 51%;
+                border: .3em solid rgb(43, 255, 0);
+                border-color: transparent rgb(43, 255, 0)  transparent rgb(43, 255, 0) ;
             }
 
             .loginField{
@@ -90,8 +104,8 @@ export default {
                 font-size: 1.3em;
                 height: 2.5em;
                 text-indent: .3em;
-                color: black;
-                border: 3px solid rgb(43, 255, 0);
+                background-color: transparent;
+                border: none;
             }
             .loginField:focus{
                 outline: none;
