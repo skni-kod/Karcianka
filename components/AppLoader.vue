@@ -17,6 +17,9 @@
                     this.isLoaded = true;
                 } 
             }
+            if(document.readyState == "complete"){
+                this.isLoaded = true;
+            } 
         }
     }
 </script>
@@ -29,7 +32,7 @@
         top: 0;
         bottom: 0;
         z-index: 100;
-        background: rgb(7, 45, 148);
+        background: rgb(0, 22, 82);
         color: white;
         font-size: 10em;
         text-transform: uppercase;

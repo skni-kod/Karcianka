@@ -85,6 +85,7 @@ export default {
                 width: 49.5%;
                 border: .3em solid rgb(43, 255, 0);
                 border-color: rgb(43, 255, 0) transparent rgb(43, 255, 0) transparent;
+                opacity: 0.4;
             }
 
             fieldset::after{
@@ -97,6 +98,7 @@ export default {
                 width: 51%;
                 border: .3em solid rgb(43, 255, 0);
                 border-color: transparent rgb(43, 255, 0)  transparent rgb(43, 255, 0) ;
+                opacity: 0.4;
             }
 
             .loginField{

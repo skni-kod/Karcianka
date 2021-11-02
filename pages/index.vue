@@ -61,7 +61,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+	head(){
+		return {
+			title: 'CYBERKARTY'
+		}
+	}
+}
 </script>
 
 <style lang="scss" scoped>
