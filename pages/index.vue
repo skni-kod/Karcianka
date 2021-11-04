@@ -17,34 +17,25 @@
         </div>
 
         <div class="buttonsBox">
-            <div class = "box">
-                <NuxtLink to="/login">
-                    <span class="button">Zaloguj się</span>
-                </NuxtLink>
+
+			<div class = "box">
+                <span class="button">Dołącz do gry</span>
+            </div>
+
+			<div class = "box">
+                <span class="button">Stwórz własną grę</span>
+            </div>
+
+			<div class = "box">
+                <span class="button" @click="showRulesPopup = true"> Zasady gry </span>
             </div>
 
             <div class = "box">
-                <NuxtLink to="/register">
-                    <span class="button"> Zarejstruj się</span>
-                </NuxtLink>
+                <span class="button" @click="showRankingPopup = true"> Rankingi Graczy </span>
             </div>
 
-            <div class = "box">
-                <NuxtLink to="/ranking">
-                    <span class="button"> Rankingi Graczy </span>
-                </NuxtLink>
-            </div>
-
-            <div class = "box">
-                <NuxtLink to="/zasady">
-                    <span class="button"> Zasady gry </span>
-                </NuxtLink>
-            </div>
-
-            <div class = "box">
-                <a href="">
-                    <span class="button"> O grze </span>
-                </a>
+			<div class = "box">
+                <span class="button" @click="showLoginPopup = true">Zaloguj sie</span>
             </div>
         </div>
 
@@ -57,6 +48,9 @@
         </div>
 
     </div>
+	<LoginPopup v-show="showLoginPopup" @close-login-popup="showLoginPopup = false"/>
+	<RankingPopup v-show="showRankingPopup" @close-ranking-popup="showRankingPopup = false"/>
+	<RulesPopup v-show="showRulesPopup" @close-rules-popup="showRulesPopup = false"/>
   </div>
 </template>
 
@@ -66,36 +60,48 @@ export default {
 		return {
 			title: 'CYBERKARTY'
 		}
+	},
+	data: ()=>{
+		return{
+			showLoginPopup: false,
+			showRegisterPopup: false,
+			showRankingPopup: false,
+			showRulesPopup: false
+		}
 	}
 }
 </script>
 
 <style lang="scss" scoped>
+	$white-color:rgb(236, 235, 235);
+	$pink-color:rgb(255, 0, 234);
+
+
 .title {
 	width: 100%;
 	text-align: center;
-	margin: 6em auto;
+	margin: 4em auto 6em auto;
 
 	.letter {
 		font-family: NeonFontTitle;
-		font-size: 7em;
+		font-size: 8em;
 		text-transform: uppercase;
 		letter-spacing: .1em;
 	}
 
 	.whiteLetter {
 		color: white;
-		text-shadow: 0 0 5px rgb(236, 235, 235), 0 0 10px rgb(241, 241, 241), 0 0 15px rgb(241, 241, 241),
-			0 0 20px rgb(241, 241, 241), 0 0 30px rgb(241, 241, 241), 0 0 45px rgb(241, 241, 241),
-			0 0 60px rgb(241, 241, 241), 0 0 75px rgb(241, 241, 241), 0 0 90px rgb(241, 241, 241),
-			0 0 110px rgb(241, 241, 241);
+		text-shadow: 0 0 5px $white-color, 0 0 10px $white-color, 0 0 15px $white-color,
+			0 0 20px $white-color, 0 0 30px $white-color, 0 0 45px $white-color,
+			0 0 60px $white-color, 0 0 75px $white-color, 0 0 90px $white-color,
+			0 0 110px $white-color;
 	}
 
 	.pinkLetter {
 		color: rgb(194, 28, 172);
-		text-shadow: 0 0 3px rgb(255, 0, 234), 0 0 6px rgb(255, 0, 234), 0 0 15px rgb(255, 0, 234),
-			0 0 30px rgb(255, 0, 234), 0 0 45px rgb(255, 0, 234), 0 0 60px rgb(218, 0, 199), 0 0 75px rgb(218, 0, 199),
-			0 0 90px rgb(218, 0, 199), 0 0 120px rgb(218, 0, 199);
+		text-shadow: 0 0 3px $pink-color, 0 0 6px $pink-color, 0 0 15px $pink-color,
+			0 0 30px $pink-color, 0 0 45px $pink-color, 0 0 60px $pink-color, 0 0 75px $pink-color,
+			0 0 90px $pink-color, 0 0 120px $pink-color;
 	}
 
 	.flashAnimation {
@@ -144,13 +150,16 @@ export default {
 		* {
 			text-decoration: none;
 			text-transform: uppercase;
-			font-family: NeonFontButtons;
+			font-family: NeonFontButtons2;
 			letter-spacing: .1em;
+			font-size: 1.3em;
 		}
+
 		.button:hover {
+			color: rgb(233, 210, 0);
 			text-shadow: 1px 0px 4px rgb(255, 213, 255), 2px 0px 4px rgb(255, 213, 255), 2px 0px 3px rgb(250, 255, 0),
 				2px 3px 15px rgb(250, 255, 0), 2px 0px 15px rgb(250, 255, 0), 5px 0px 125px rgb(250, 255, 0),
-				20px 0vw 200px rgb(250, 255, 0), 40px 0vw 200px rgb(250, 255, 0);
+				20px 0vw 200px ;
 		}
 	}
 	.patchNotesBox {
