@@ -19,11 +19,7 @@
         <div class="buttonsBox">
 
 			<div class = "box">
-                <span class="button">Dołącz do gry</span>
-            </div>
-
-			<div class = "box">
-                <span class="button">Stwórz własną grę</span>
+                <span class="button" @click="showPlayPopup = true">graj</span>
             </div>
 
 			<div class = "box">
@@ -34,9 +30,6 @@
                 <span class="button" @click="showRankingPopup = true"> Rankingi Graczy </span>
             </div>
 
-			<div class = "box">
-                <span class="button" @click="showLoginPopup = true">Zaloguj sie</span>
-            </div>
         </div>
 
         <div class="patchNotesBox">
@@ -46,11 +39,10 @@
                 :key="note"
             />
         </div>
-
+		<PlayPopup :open="showPlayPopup" @close-play-popup="showPlayPopup = false"/>
+		<RankingPopup v-show="showRankingPopup" @close-ranking-popup="showRankingPopup = false"/>
+		<RulesPopup v-show="showRulesPopup" @close-rules-popup="showRulesPopup = false"/>
     </div>
-	<LoginPopup v-show="showLoginPopup" @close-login-popup="showLoginPopup = false"/>
-	<RankingPopup v-show="showRankingPopup" @close-ranking-popup="showRankingPopup = false"/>
-	<RulesPopup v-show="showRulesPopup" @close-rules-popup="showRulesPopup = false"/>
   </div>
 </template>
 
@@ -63,8 +55,7 @@ export default {
 	},
 	data: ()=>{
 		return{
-			showLoginPopup: false,
-			showRegisterPopup: false,
+			showPlayPopup: false,
 			showRankingPopup: false,
 			showRulesPopup: false
 		}
@@ -141,7 +132,7 @@ export default {
 
 	.box {
 		width: 100%;
-		height: 2.5em;
+		height: 2.8em;
 		display: flex;
 		justify-content: center;
 		align-items: center;
