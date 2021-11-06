@@ -1,5 +1,5 @@
 <template>
-  <div>
+<div class="container" onselectstart="return false;">
     <AppLoader />
     <div class="title">
         <span class="letter whiteLetter">cyber</span>
@@ -40,10 +40,10 @@
             />
         </div>
 		<PlayPopup :open="showPlayPopup" @close-play-popup="showPlayPopup = false"/>
-		<RankingPopup v-show="showRankingPopup" @close-ranking-popup="showRankingPopup = false"/>
-		<RulesPopup v-show="showRulesPopup" @close-rules-popup="showRulesPopup = false"/>
+		<RankingPopup :open="showRankingPopup" @close-ranking-popup="showRankingPopup = false"/>
+		<RulesPopup :open="showRulesPopup" @close-rules-popup="showRulesPopup = false"/>
     </div>
-  </div>
+</div>
 </template>
 
 <script>
@@ -67,11 +67,17 @@ export default {
 	$white-color:rgb(236, 235, 235);
 	$pink-color:rgb(255, 0, 234);
 
-
+.container{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
 .title {
 	width: 100%;
 	text-align: center;
-	margin: 4em auto 6em auto;
+	margin: 4em auto 8em auto;
 
 	.letter {
 		font-family: NeonFontTitle;
@@ -105,7 +111,6 @@ export default {
 	flex-wrap: wrap;
 	align-items: center;
 	width: 100%;
-	height: 100%;
 
 	.rankingBox {
 		width: 25%;
