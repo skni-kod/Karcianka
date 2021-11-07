@@ -7,11 +7,11 @@
                 <p class="gameButton">stwórz grę</p>
             </div>
             <div class="accountSection">
-                <transition name="loginForm">
+                <transition name="form">
                     <div class="loginBox" v-if="!registerFormActive">
                         <form class="loginForm">
                             <fieldset>
-                                <input type="text" class="nickname formInput" name="nickname" maxlength="20" placeholder="Nickname" required />
+                                <input type="text" class="nickname formInput" name="nickname" maxlength="15" placeholder="Nickname" required />
                             </fieldset>
                             <fieldset>
                                 <input type="password" class="password formInput" name="password" maxlength="30" placeholder="Hasło" required />
@@ -22,11 +22,11 @@
                         <p class="toRegisterButton" @click="registerFormActive = true">Załóż konto</p>
                     </div>
                 </transition>
-                <transition name="registerForm">
+                <transition name="form">
                     <div class="registerBox" v-if="registerFormActive">
                         <form class="registerForm">
                             <fieldset>
-                                <input type="text" class="nickname formInput" name="nickname" maxlength="20" placeholder="Nazwa użytkownika" required/>
+                                <input type="text" class="username formInput" name="username" maxlength="20" placeholder="Nazwa użytkownika" required/>
                             </fieldset>
                             <fieldset>
                                 <input type="email" class="email formInput" name="email" maxlength="70" placeholder="Email" required/>
@@ -58,6 +58,48 @@
             },
             registerUser(e){
                 e.preventDefault();
+                let username = false, email = false, password = false, confirmPassword = false, terms = document.querySelector('.terms').checked;
+
+                if(/^[A-Za-z0-9-_]{4,15}$/.test(document.querySelector("[name='username']").value)) username = true;
+                if(/^\S+@\S+$/.test(document.querySelector("[name='email']").value)) email = true;
+                if(/^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$^&*-]).{8,30}$/.test(document.querySelector("[name='password']").value)) password = true;
+                if(document.querySelector("[name='password']").value === document.querySelector("[name='confirmPassword']").value && document.querySelector("[name='confirmPassword']").value.length !==0) confirmPassword = true; 
+
+                console.log(terms)
+
+                if(username && email && password && confirmPassword && terms){
+                    try{
+                        
+                    }catch(err){
+                        console.log(err);
+                    }
+                }else{
+                    if(!username){
+                        document.querySelector("[name='username']").classList.add('errorFormInput');
+                    }else{
+                        document.querySelector("[name='username']").classList.remove('errorFormInput');
+                    }
+                    if(!email){
+                        document.querySelector("[name='email']").classList.add('errorFormInput');
+                    }else{
+                        document.querySelector("[name='email']").classList.remove('errorFormInput');
+                    }
+                    if(!password){
+                        document.querySelector("[name='password']").classList.add('errorFormInput');
+                    }else{
+                        document.querySelector("[name='password']").classList.remove('errorFormInput');
+                    }
+                    if(!confirmPassword){
+                        document.querySelector("[name='confirmPassword']").classList.add('errorFormInput');
+                    }else{
+                        document.querySelector("[name='confirmPassword']").classList.remove('errorFormInput');
+                    }
+                    if(!terms){
+                        document.querySelector('.terms').classList.add('errorFormInput');
+                    }else{
+                        document.querySelector('.terms').classList.remove('errorFormInput');
+                    }
+                }
             }
         },
         data:()=>{
@@ -70,7 +112,9 @@
 
 <style lang="scss" scoped>  
     $pink-color: rgb(255, 0, 234);
-    $blue-color: rgb(0, 164, 230); 
+    $blue-color: rgb(0, 164, 230);
+    $red-color: rgb(255,0,0);
+     
     *{
         color: black;
         font-family: NeonFontButtons2;
@@ -106,21 +150,21 @@
                 border: .15em solid rgba(0, 0, 0, 0.4);
                 transition: all .1s ease;
                 text-align: center;
-            }
 
-            .nickname:focus{
-                outline: none;
-                color:rgb(20, 216, 255);
-                text-shadow: 1px 0px 4px $blue-color, 2px 0px 4px $blue-color, 2px 0px 3px $blue-color,
-				    2px 3px 15px $blue-color, 2px 0px 15px $blue-color, 2px 0px 20px $blue-color, 2px 0px 20px $blue-color, 5px 0px 125px $blue-color,
-				    20px 0vw 200px ;
-                border-color: rgb(255, 0, 234);
-                box-shadow: 0px 0px 10px 2px $pink-color, inset 0px 0px 10px 2px $pink-color;
-            }
+                &:focus{
+                    outline: none;
+                    color:rgb(20, 216, 255);
+                    text-shadow: 1px 0px 4px $blue-color, 2px 0px 4px $blue-color, 2px 0px 3px $blue-color,
+                        2px 3px 15px $blue-color, 2px 0px 15px $blue-color, 2px 0px 20px $blue-color, 2px 0px 20px $blue-color, 5px 0px 125px $blue-color,
+                        20px 0vw 200px ;
+                    border-color: rgb(255, 0, 234);
+                    box-shadow: 0px 0px 10px 2px $pink-color, inset 0px 0px 10px 2px $pink-color;
+                }
+                &::placeholder{
+                    text-shadow: 0 0 0 rgb(230, 230, 230);
+                    text-align: center;
+                }
 
-            .nickname::placeholder{
-                text-shadow: 0 0 0 rgb(230, 230, 230);
-                text-align: center;
             }
 
             .gameButton{
@@ -135,17 +179,25 @@
                 letter-spacing: .07em;
                 border: .15em solid rgba(0, 0, 0, 0.4);
                 transition: all .1s ease;
-            }
 
+                &:hover{
+                    color:rgb(20, 216, 255);
+                    text-shadow: 1px 0px 4px $blue-color, 2px 0px 4px $blue-color, 2px 0px 3px $blue-color,
+                        2px 3px 15px $blue-color, 2px 0px 15px $blue-color, 2px 0px 20px $blue-color, 2px 0px 20px $blue-color, 5px 0px 125px $blue-color,
+                        20px 0vw 200px ;
+                    border-color: rgb(255, 0, 234);
+                    box-shadow: 0px 0px 10px 2px $pink-color, inset 0px 0px 10px 2px $pink-color; 
+                }
+            }
 /*
             .gameButton::before{
                 content: '';
                 position: absolute;
-                top: 0;
+                top: -.02em;
                 left: -.15em;
                 right: -.15em;
-                height: .1em;
-                background-color: transparent;
+                height: .08em;
+                background-color: rgb(230, 230, 230);
             }
             .gameButton::after{
                 content: '';
@@ -157,14 +209,6 @@
                 background-color: rgb(230, 230, 230);
             }
 */
-            .gameButton:hover{
-                color:rgb(20, 216, 255);
-                text-shadow: 1px 0px 4px $blue-color, 2px 0px 4px $blue-color, 2px 0px 3px $blue-color,
-				2px 3px 15px $blue-color, 2px 0px 15px $blue-color, 2px 0px 20px $blue-color, 2px 0px 20px $blue-color, 5px 0px 125px $blue-color,
-				20px 0vw 200px ;
-                border-color: rgb(255, 0, 234);
-                box-shadow: 0px 0px 10px 2px $pink-color, inset 0px 0px 10px 2px $pink-color; 
-            }
         }
 
         .loginBox{
@@ -195,21 +239,20 @@
                     border: .15em solid rgba(0, 0, 0, 0.4);
                     transition: all .1s ease;
                     text-align: center;
-                }
 
-                .formInput:focus{
-                    outline: none;
-                    color:rgb(20, 216, 255);
-                    text-shadow: 1px 0px 4px $blue-color, 2px 0px 4px $blue-color, 2px 0px 3px $blue-color,
-                            2px 3px 15px $blue-color, 2px 0px 15px $blue-color, 2px 0px 20px $blue-color, 2px 0px 20px $blue-color, 5px 0px 125px $blue-color,
-                            20px 0vw 200px ;
-                    border-color: rgb(255, 0, 234);
-                    box-shadow: 0px 0px 10px 2px $pink-color, inset 0px 0px 10px 2px $pink-color;
-                }
-
-                .formInput::placeholder{
-                    text-shadow: 0 0 0 rgb(230, 230, 230);
-                    text-align: center;
+                    &:focus{
+                        outline: none;
+                        color:rgb(20, 216, 255);
+                        text-shadow: 1px 0px 4px $blue-color, 2px 0px 4px $blue-color, 2px 0px 3px $blue-color,
+                                2px 3px 15px $blue-color, 2px 0px 15px $blue-color, 2px 0px 20px $blue-color, 2px 0px 20px $blue-color, 5px 0px 125px $blue-color,
+                                20px 0vw 200px ;
+                        border-color: rgb(255, 0, 234);
+                        box-shadow: 0px 0px 10px 2px $pink-color, inset 0px 0px 10px 2px $pink-color;
+                    }
+                    &::placeholder{
+                        text-shadow: 0 0 0 rgb(230, 230, 230);
+                        text-align: center;
+                    }
                 }
 
                 .loginButton{
@@ -224,15 +267,16 @@
                     letter-spacing: .07em;
                     border: .15em solid rgba(0, 0, 0, 0.4);
                     transition: all .1s ease;
-                }
-                .loginButton:hover{
-                    color:rgb(20, 216, 255);
-                    text-shadow: 1px 0px 4px $blue-color, 2px 0px 4px $blue-color, 2px 0px 3px $blue-color,
-                            2px 3px 15px $blue-color, 2px 0px 15px $blue-color, 2px 0px 20px $blue-color, 2px 0px 20px $blue-color, 5px 0px 125px $blue-color,
-                            20px 0vw 200px ;
-                    border-color: rgb(255, 0, 234);
-                    box-shadow: 0px 0px 10px 2px $pink-color, inset 0px 0px 10px 2px $pink-color;
-                    cursor: pointer;
+
+                    &:hover{
+                        color:rgb(20, 216, 255);
+                        text-shadow: 1px 0px 4px $blue-color, 2px 0px 4px $blue-color, 2px 0px 3px $blue-color,
+                                2px 3px 15px $blue-color, 2px 0px 15px $blue-color, 2px 0px 20px $blue-color, 2px 0px 20px $blue-color, 5px 0px 125px $blue-color,
+                                20px 0vw 200px ;
+                        border-color: rgb(255, 0, 234);
+                        box-shadow: 0px 0px 10px 2px $pink-color, inset 0px 0px 10px 2px $pink-color;
+                        cursor: pointer;
+                    }
                 }
             }
         }
@@ -267,25 +311,29 @@
                     border: .15em solid rgba(0, 0, 0, 0.4);
                     transition: all .1s ease;
                     text-align: center;
+
+                    &:focus{
+                        outline: none;
+                        color:rgb(20, 216, 255);
+                        text-shadow: 1px 0px 4px $blue-color, 2px 0px 4px $blue-color, 2px 0px 3px $blue-color,
+                                2px 3px 15px $blue-color, 2px 0px 15px $blue-color, 2px 0px 20px $blue-color, 2px 0px 20px $blue-color, 5px 0px 125px $blue-color,
+                                20px 0vw 200px ;
+                        border-color: rgb(255, 0, 234);
+                        box-shadow: 0px 0px 10px 2px $pink-color, inset 0px 0px 10px 2px $pink-color;
+                    }
+                    &::placeholder{
+                        text-shadow: 0 0 0 rgb(230, 230, 230);
+                        text-align: center;
+                    }
+                }
+
+                .errorFormInput{
+                    border-color: rgb(255, 23, 10);
+                    box-shadow: 0px 0px 10px 2px $red-color, inset 0px 0px 10px 2px $red-color;
                 }
 
                 .password{
                     margin: 0 0 1em 0;
-                }
-
-                .formInput:focus{
-                    outline: none;
-                    color:rgb(20, 216, 255);
-                    text-shadow: 1px 0px 4px $blue-color, 2px 0px 4px $blue-color, 2px 0px 3px $blue-color,
-                            2px 3px 15px $blue-color, 2px 0px 15px $blue-color, 2px 0px 20px $blue-color, 2px 0px 20px $blue-color, 5px 0px 125px $blue-color,
-                            20px 0vw 200px ;
-                    border-color: rgb(255, 0, 234);
-                    box-shadow: 0px 0px 10px 2px $pink-color, inset 0px 0px 10px 2px $pink-color;
-                }
-
-                .formInput::placeholder{
-                    text-shadow: 0 0 0 rgb(230, 230, 230);
-                    text-align: center;
                 }
 
                 .registerButton{
@@ -300,17 +348,17 @@
                     letter-spacing: .07em;
                     border: .15em solid rgba(0, 0, 0, 0.4);
                     transition: all .1s ease;
+
+                    &:hover{
+                        color:rgb(20, 216, 255);
+                        text-shadow: 1px 0px 4px $blue-color, 2px 0px 4px $blue-color, 2px 0px 3px $blue-color,
+                                2px 3px 15px $blue-color, 2px 0px 15px $blue-color, 2px 0px 20px $blue-color, 2px 0px 20px $blue-color, 5px 0px 125px $blue-color,
+                                20px 0vw 200px ;
+                        border-color: rgb(255, 0, 234);
+                        box-shadow: 0px 0px 10px 2px $pink-color, inset 0px 0px 10px 2px $pink-color;
+                        cursor: pointer;
+                    }
                 }
-                .registerButton:hover{
-                    color:rgb(20, 216, 255);
-                    text-shadow: 1px 0px 4px $blue-color, 2px 0px 4px $blue-color, 2px 0px 3px $blue-color,
-                            2px 3px 15px $blue-color, 2px 0px 15px $blue-color, 2px 0px 20px $blue-color, 2px 0px 20px $blue-color, 5px 0px 125px $blue-color,
-                            20px 0vw 200px ;
-                    border-color: rgb(255, 0, 234);
-                    box-shadow: 0px 0px 10px 2px $pink-color, inset 0px 0px 10px 2px $pink-color;
-                    cursor: pointer;
-                }
-                
             }
         }
 
@@ -333,15 +381,16 @@
             letter-spacing: .07em;
             border: .15em solid rgba(0, 0, 0, 0.4);
             transition: all .1s ease;
-        }
-        .toRegisterButton:hover{
-            color:rgb(20, 216, 255);
-            text-shadow: 1px 0px 4px $blue-color, 2px 0px 4px $blue-color, 2px 0px 3px $blue-color,
-				    2px 3px 15px $blue-color, 2px 0px 15px $blue-color, 2px 0px 20px $blue-color, 2px 0px 20px $blue-color, 5px 0px 125px $blue-color,
-				    20px 0vw 200px ;
-            border-color: rgb(255, 0, 234);
-            box-shadow: 0px 0px 10px 2px $pink-color, inset 0px 0px 10px 2px $pink-color;
-            cursor: pointer;
+
+            &:hover{
+                color:rgb(20, 216, 255);
+                text-shadow: 1px 0px 4px $blue-color, 2px 0px 4px $blue-color, 2px 0px 3px $blue-color,
+                        2px 3px 15px $blue-color, 2px 0px 15px $blue-color, 2px 0px 20px $blue-color, 2px 0px 20px $blue-color, 5px 0px 125px $blue-color,
+                        20px 0vw 200px ;
+                border-color: rgb(255, 0, 234);
+                box-shadow: 0px 0px 10px 2px $pink-color, inset 0px 0px 10px 2px $pink-color;
+                cursor: pointer;
+            }
         }
     }
 
@@ -371,27 +420,15 @@
         transition: all .5s ease;
     }
 
-    .loginForm-enter, .loginForm-leave-to{
+    .form-enter, .form-leave-to{
         transform: translateX(100vw);
         opacity: 0.3;
     }
-    .loginForm-enter-to, .loginForm-leave-from{
+    .form-enter-to, .form-leave-from{
         transform: translateX(0);
         opacity: 1;
     }
-    .loginForm-enter-active, .loginForm-leave-active{
-        transition: all .5s ease;
-    }
-
-    .registerForm-enter, .registerForm-leave-to{
-        transform: translateX(100vw);
-        opacity: 0.3;
-    }
-    .registerForm-enter-to, .registerForm-leave-from{
-        transform: translateX(0);
-        opacity: 1;
-    }
-    .registerForm-enter-active, .registerForm-leave-active{
+    .form-enter-active, .form-leave-active{
         transition: all .5s ease;
     }
 </style>
