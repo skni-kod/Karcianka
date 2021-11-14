@@ -1,30 +1,30 @@
 @font-face {
-	font-family: NeonFontTitle;
-	src: url("@/assets/fonts/hellodenverdisplay.ttf");
+    font-family: NeonFontTitle;
+    src: url('@/assets/fonts/hellodenverdisplay.ttf');
 }
 @font-face {
-	font-family: NeonFontButtons;
-	src: url("@/assets/fonts/Monoton-Regular.ttf");
+    font-family: NeonFontButtons;
+    src: url('@/assets/fonts/Monoton-Regular.ttf');
 }
 @font-face {
-	font-family: NeonFontButtons2;
-	src: url("@/assets/fonts/Sportrop.ttf");
+    font-family: NeonFontButtons2;
+    src: url('@/assets/fonts/Sportrop.ttf');
 }
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	z-index: 1;
-	position: relative;
-	color: white;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    z-index: 1;
+    position: relative;
+    color: white;
 }
 body {
-	height: 100%;
-	width: 100%;
-	background-image: url("@/assets/img/background/4127298.jpg");
-	background-size: 100%;
-	background-position: center;
-	background-attachment: fixed;
-	background-repeat: repeat;
-	cursor: pointer;
+    height: 100%;
+    width: 100%;
+    background-image: url('@/assets/img/background/4127298.jpg');
+    background-size: 100%;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: repeat;
+    cursor: pointer;
 }
