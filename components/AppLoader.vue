@@ -13,11 +13,11 @@
         },
         mounted(){
             document.onreadystatechange = () =>{
-                if(document.readyState == "complete"){
+                if(document.readyState === "complete"){
                     this.isLoaded = true;
                 } 
             }
-            if(document.readyState == "complete"){
+            if(document.readyState === "complete"){
                 this.isLoaded = true;
             } 
         }

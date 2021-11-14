@@ -11,8 +11,8 @@
         <div class="rankingBox">
             <p class="panelTitle">TOP 5 GRACZY</p>
             <RankedPlayer 
-                v-for="player in 5"
-                :key="player"
+				v-for="player in 5"
+            	:key="player"
             />
         </div>
 
@@ -29,7 +29,7 @@
             <div class = "box">
                 <span class="button" @click="showRankingPopup = true"> Rankingi Graczy </span>
             </div>
-
+			
         </div>
 
         <div class="patchNotesBox">
