@@ -9,8 +9,8 @@
                     maxlength="20"
                     placeholder="Podaj nickname"
                 />
-                <p class="gameButton">dołącz do gry</p>
-                <p class="gameButton">stwórz grę</p>
+                <p class="gameButton">graj</p>
+                <!-- href na podstrone z lista gier -->
             </div>
             <div class="accountSection">
                 <transition name="form">
