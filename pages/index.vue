@@ -1,7 +1,6 @@
 <template>
     <div class="container" onselectstart="return false;">
         <AppLoader />
-
         <div class="title">
             <span class="letter whiteLetter">cyber</span>
             <span class="letter pinkLetter flashAnimation">karty</span>
