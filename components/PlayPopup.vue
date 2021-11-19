@@ -65,8 +65,6 @@
                 if(/^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$^&*-]).{8,30}$/.test(document.querySelector("[name='password']").value)) password = true;
                 if(document.querySelector("[name='password']").value === document.querySelector("[name='confirmPassword']").value && document.querySelector("[name='confirmPassword']").value.length !==0) confirmPassword = true; 
 
-                console.log(terms)
-
                 if(username && email && password && confirmPassword && terms){
                     try{
                         
@@ -189,26 +187,6 @@
                     box-shadow: 0px 0px 10px 2px $pink-color, inset 0px 0px 10px 2px $pink-color; 
                 }
             }
-/*
-            .gameButton::before{
-                content: '';
-                position: absolute;
-                top: -.02em;
-                left: -.15em;
-                right: -.15em;
-                height: .08em;
-                background-color: rgb(230, 230, 230);
-            }
-            .gameButton::after{
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: -.15em;
-                right: -.15em;
-                height: .08em;
-                background-color: rgb(230, 230, 230);
-            }
-*/
         }
 
         .loginBox{
