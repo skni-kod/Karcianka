@@ -10,7 +10,6 @@
                     placeholder="Podaj nickname"
                 />
                 <p class="gameButton">graj</p>
-                <!-- href na podstrone z lista gier -->
             </div>
             <div class="accountSection">
                 <transition name="form">

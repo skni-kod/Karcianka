@@ -3,8 +3,8 @@
         <canvas
             id="canvas"
             class="canvas"
-            width="350px"
-            height="500px"
+            width="800px"
+            height="800px"
         ></canvas>
     </div>
 </template>
