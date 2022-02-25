@@ -19,9 +19,9 @@
                                 <input
                                     type="text"
                                     class="nickname formInput"
-                                    name="nickname"
+                                    name="username"
                                     maxlength="15"
-                                    placeholder="Nickname"
+                                    placeholder="Username"
                                     required
                                 />
                             </fieldset>
@@ -125,10 +125,29 @@
 export default {
     props: ['open'],
     methods: {
-        loginUser(e) {
+        async loginUser(e) {
             e.preventDefault()
+            try {
+                await fetch('http://localhost:5000/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        username:
+                            document.querySelector("[name='username']").value,
+                        passwd: document.querySelector("[name='password']")
+                            .value,
+                    }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        localStorage.setItem('token', data)
+                        this.$router.push('/games')
+                    })
+            } catch (err) {
+                console.log(err)
+            }
         },
-        registerUser(e) {
+        async registerUser(e) {
             e.preventDefault()
             let username = false,
                 email = false,
@@ -160,10 +179,27 @@ export default {
             )
                 confirmPassword = true
 
-            console.log(terms)
-
             if (username && email && password && confirmPassword && terms) {
                 try {
+                    await fetch('http://localhost:5000/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            username:
+                                document.querySelector("[name='username']")
+                                    .value,
+                            email: document.querySelector("[name='email']")
+                                .value,
+                            passwd: document.querySelector("[name='password']")
+                                .value,
+                        }),
+                    }).then((data) => {
+                        if (data.status == 200) {
+                            this.$router.push('/games')
+                        }
+                    })
                 } catch (err) {
                     console.log(err)
                 }
@@ -232,6 +268,7 @@ $red-color: rgb(255, 0, 0);
 * {
     color: black;
     font-family: NeonFontButtons2;
+    font-size: 16px;
 }
 .playPopup {
     z-index: 100;
@@ -255,14 +292,14 @@ $red-color: rgb(255, 0, 0);
 
     .gameSection {
         .nickname {
-            margin: 1em;
+            margin: 1.5rem;
             width: 40%;
-            height: 3em;
-            text-indent: 0.4em;
-            font-size: 1.3em;
-            letter-spacing: 0.1em;
+            height: 4rem;
+            text-indent: 0.4rem;
+            font-size: 1.5rem;
+            letter-spacing: 0.1rem;
             background-color: transparent;
-            border: 0.15em solid rgba(0, 0, 0, 0.4);
+            border: 0.2rem solid rgba(0, 0, 0, 0.4);
             transition: all 0.1s ease;
             text-align: center;
 
@@ -285,16 +322,16 @@ $red-color: rgb(255, 0, 0);
         }
 
         .gameButton {
-            height: 2.3em;
+            height: 4rem;
             width: 40%;
-            font-size: 2em;
+            font-size: 2rem;
+            letter-spacing: 0.3rem;
             text-transform: uppercase;
-            margin: 0.5em;
+            margin: 0.5rem;
             display: flex;
             justify-content: center;
             align-items: center;
-            letter-spacing: 0.07em;
-            border: 0.15em solid rgba(0, 0, 0, 0.4);
+            border: 0.2rem solid rgba(0, 0, 0, 0.4);
             transition: all 0.1s ease;
 
             &:hover {
@@ -319,11 +356,11 @@ $red-color: rgb(255, 0, 0);
         flex-direction: column;
 
         .loginForm {
-            width: 40%;
+            width: 50%;
 
             fieldset {
                 border: none;
-                margin: 1em 0;
+                margin: 1.5rem 0;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -331,12 +368,12 @@ $red-color: rgb(255, 0, 0);
 
             .formInput {
                 width: 100%;
-                height: 2.5em;
-                font-size: 1.5em;
-                text-indent: 0.4em;
-                letter-spacing: 0.1em;
+                height: 4rem;
+                font-size: 1.8rem;
+                text-indent: 0.4rem;
+                letter-spacing: 0.1rem;
                 background-color: transparent;
-                border: 0.15em solid rgba(0, 0, 0, 0.4);
+                border: 0.2rem solid rgba(0, 0, 0, 0.4);
                 transition: all 0.1s ease;
                 text-align: center;
 
@@ -360,15 +397,15 @@ $red-color: rgb(255, 0, 0);
 
             .loginButton {
                 width: 100%;
-                height: 2.2em;
-                margin: 0.8em 0 0.4em 0;
-                font-size: 2em;
+                height: 3.5rem;
+                margin: 0.8rem 0 0.4rem 0;
+                font-size: 2rem;
                 text-transform: uppercase;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                letter-spacing: 0.07em;
-                border: 0.15em solid rgba(0, 0, 0, 0.4);
+                letter-spacing: 0.2rem;
+                border: 0.2rem solid rgba(0, 0, 0, 0.4);
                 transition: all 0.1s ease;
 
                 &:hover {
@@ -396,11 +433,11 @@ $red-color: rgb(255, 0, 0);
         position: absolute;
 
         .registerForm {
-            width: 40%;
+            width: 50%;
 
             fieldset {
                 border: none;
-                margin: 1em 0;
+                margin: 1.5rem 0;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -409,12 +446,12 @@ $red-color: rgb(255, 0, 0);
 
             .formInput {
                 width: 100%;
-                height: 2.5em;
-                font-size: 1.5em;
-                text-indent: 0.4em;
-                letter-spacing: 0.1em;
+                height: 4rem;
+                font-size: 1.8rem;
+                text-indent: 0.4rem;
+                letter-spacing: 0.1rem;
                 background-color: transparent;
-                border: 0.15em solid rgba(0, 0, 0, 0.4);
+                border: 0.2rem solid rgba(0, 0, 0, 0.4);
                 transition: all 0.1s ease;
                 text-align: center;
 
@@ -443,20 +480,20 @@ $red-color: rgb(255, 0, 0);
             }
 
             .password {
-                margin: 0 0 1em 0;
+                margin: 0 0 1rem 0;
             }
 
             .registerButton {
                 width: 100%;
-                height: 2.2em;
-                margin: 0.8em 0 0.4em 0;
-                font-size: 2em;
+                height: 3.5rem;
+                margin: 0.8rem 0 0.4rem 0;
+                font-size: 2rem;
                 text-transform: uppercase;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                letter-spacing: 0.07em;
-                border: 0.15em solid rgba(0, 0, 0, 0.4);
+                letter-spacing: 0.2rem;
+                border: 0.2rem solid rgba(0, 0, 0, 0.4);
                 transition: all 0.1s ease;
 
                 &:hover {
@@ -478,21 +515,21 @@ $red-color: rgb(255, 0, 0);
     .text {
         width: 40%;
         text-transform: uppercase;
-        letter-spacing: 0.1em;
-        font-size: 1.8em;
+        letter-spacing: 0.1rem;
+        font-size: 1.8rem;
         text-align: center;
     }
     .toRegisterButton {
-        width: 40%;
-        height: 2.2em;
-        margin: 0.8em 0 0.4em 0;
-        font-size: 2em;
+        width: 50%;
+        height: 3.5rem;
+        margin: 0.8rem 0 0.4rem 0;
+        font-size: 2rem;
         text-transform: uppercase;
         display: flex;
         justify-content: center;
         align-items: center;
-        letter-spacing: 0.07em;
-        border: 0.15em solid rgba(0, 0, 0, 0.4);
+        letter-spacing: 0.2rem;
+        border: 0.2rem solid rgba(0, 0, 0, 0.4);
         transition: all 0.1s ease;
 
         &:hover {
@@ -512,10 +549,10 @@ $red-color: rgb(255, 0, 0);
 
 .closePopup {
     position: absolute;
-    width: 4vh;
-    height: 4vh;
-    top: 0.7em;
-    left: 0.7em;
+    width: 2.5rem;
+    height: 2.5rem;
+    top: 1rem;
+    left: 1rem;
     background: url('@/assets/img/x-lg.svg');
     background-position: center;
     background-repeat: no-repeat;

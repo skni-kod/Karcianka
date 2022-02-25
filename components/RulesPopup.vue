@@ -158,6 +158,7 @@ export default {
     color: black;
     font-family: NeonFontButtons2;
     box-sizing: border-box;
+    font-size: 16px;
 }
 
 .rulesPopup {
@@ -174,14 +175,14 @@ export default {
         position: sticky;
         top: 0;
         z-index: 100;
-        padding: 0 0 1em 0;
+        padding: 0 0 2rem 0;
 
         .closePopup {
             position: absolute;
-            width: 2em;
-            height: 2em;
-            top: 1em;
-            left: 1em;
+            width: 2rem;
+            height: 2rem;
+            top: 1rem;
+            left: 1rem;
             background: url('@/assets/img/x-lg.svg');
             background-position: center;
             background-repeat: no-repeat;
@@ -191,10 +192,10 @@ export default {
 
         .title {
             width: 100%;
-            font-size: 2.2em;
+            font-size: 2.2rem;
             text-transform: uppercase;
             text-align: center;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.2rem;
         }
     }
 
@@ -210,14 +211,14 @@ export default {
             height: 100%;
 
             .list {
-                top: 5em;
+                top: 5rem;
 
                 .listElement {
                     display: grid;
                     align-items: center;
-                    height: 2.2em;
-                    font-size: 2em;
-                    letter-spacing: 0.1em;
+                    height: 4.5rem;
+                    font-size: 2rem;
+                    letter-spacing: 0.2rem;
                 }
             }
         }
@@ -233,19 +234,19 @@ export default {
                 .gameTitle {
                     position: absolute;
                     top: 0;
-                    height: 2em;
+                    height: 2rem;
                     width: 100%;
-                    font-size: 2.3em;
-                    letter-spacing: 0.1em;
+                    font-size: 2.3rem;
+                    letter-spacing: 0.2rem;
                 }
                 .rulesList {
                     list-style-type: none;
                     text-align: left;
-                    padding: 0 1.5em 0 0;
-                    top: 5em;
+                    padding: 0 3rem 0 0;
+                    top: 5rem;
 
                     .listElement {
-                        padding: 0.5em 0;
+                        padding: 0.5rem 0;
                     }
                 }
             }
