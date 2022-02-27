@@ -7,10 +7,7 @@
         </div>
 
         <div class="main">
-            <div class="rankingBox">
-                <p class="panelTitle">TOP 5 GRACZY</p>
-                <RankedPlayer v-for="player in 5" :key="player" />
-            </div>
+            <TopPlayersList />
 
             <div class="buttonsBox">
                 <div class="box">
@@ -31,11 +28,7 @@
                     </span>
                 </div>
             </div>
-
-            <div class="patchNotesBox">
-                <p class="panelTitle">PATCH NOTES</p>
-                <PatchNote v-for="note in 5" :key="note" />
-            </div>
+            <LastestPatchNotes />
             <PlayPopup
                 :open="showPlayPopup"
                 @close-play-popup="showPlayPopup = false"
@@ -72,6 +65,7 @@ export default {
 <style lang="scss" scoped>
 $white-color: rgb(236, 235, 235);
 $pink-color: rgb(255, 0, 234);
+$green-color: rgb(124, 255, 2);
 
 * {
     font-size: 16px;
@@ -82,11 +76,12 @@ $pink-color: rgb(255, 0, 234);
     left: 0;
     right: 0;
     bottom: 0;
+    background-color: rgb(5, 5, 5);
 }
 .title {
     width: 100%;
     text-align: center;
-    margin: 4rem auto 8rem auto;
+    margin: 3rem auto 7rem auto;
 
     .letter {
         font-family: NeonFontTitle;
@@ -100,7 +95,7 @@ $pink-color: rgb(255, 0, 234);
         text-shadow: 0 0 5px $white-color, 0 0 10px $white-color,
             0 0 15px $white-color, 0 0 20px $white-color, 0 0 30px $white-color,
             0 0 45px $white-color, 0 0 60px $white-color, 0 0 75px $white-color,
-            0 0 90px $white-color, 0 0 110px $white-color;
+            0 0 90px $white-color;
     }
 
     .pinkLetter {
@@ -117,33 +112,14 @@ $pink-color: rgb(255, 0, 234);
 }
 
 .main {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr;
 
-    .rankingBox {
-        width: 25%;
-        padding: 0 0 0 1rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-
-        .panelTitle {
-            font-family: NeonFontTitle;
-            text-align: center;
-            font-size: 3rem;
-            margin: 0 0 0.5rem 0;
-            letter-spacing: 0.1rem;
-            color: rgba(255, 115, 0, 0.897);
-            text-shadow: 0 0 5px rgb(255, 139, 6), 0 0 10px rgb(255, 139, 6),
-                0 0 15px rgb(255, 139, 6), 0 0 20px rgb(255, 139, 6),
-                0 0 30px rgb(255, 139, 6);
-        }
-    }
     .buttonsBox {
-        width: 50%;
+        width: 100%;
+        grid-column: 2/3;
+        padding: 3rem 0 0 0;
 
         .box {
             width: 100%;
@@ -158,36 +134,15 @@ $pink-color: rgb(255, 0, 234);
                 font-family: NeonFontButtons2;
                 letter-spacing: 0.1rem;
                 font-size: 3rem;
+                opacity: 0.1;
             }
 
             .button:hover {
-                color: rgb(233, 210, 0);
-                text-shadow: 1px 0px 4px rgb(255, 213, 255),
-                    2px 0px 4px rgb(255, 213, 255), 2px 0px 3px rgb(250, 255, 0),
-                    2px 3px 15px rgb(250, 255, 0), 2px 0px 15px rgb(250, 255, 0),
-                    5px 0px 125px rgb(250, 255, 0), 20px 0vw 200px;
+                color: rgb(94, 255, 0);
+                text-shadow: 0 0 5px $green-color, 0 0 10px $green-color,
+                    0 0 15px $green-color;
+                opacity: 1;
             }
-        }
-    }
-
-    .patchNotesBox {
-        width: 25%;
-        padding: 0 1rem 0 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-
-        .panelTitle {
-            font-family: NeonFontTitle;
-            text-align: center;
-            font-size: 3rem;
-            margin: 0 0 0.5rem 0;
-            letter-spacing: 0.1em;
-            color: rgba(255, 115, 0, 0.897);
-            text-shadow: 0 0 5px rgb(255, 139, 6), 0 0 10px rgb(255, 139, 6),
-                0 0 15px rgb(255, 139, 6), 0 0 20px rgb(255, 139, 6),
-                0 0 30px rgb(255, 139, 6);
         }
     }
 }
@@ -229,15 +184,6 @@ $pink-color: rgb(255, 0, 234);
         grid-template-rows: 14rem 30rem 30rem;
         width: 100%;
 
-        .rankingBox {
-            grid-row: 2;
-            width: 100%;
-            font-size: 1rem;
-
-            .panelTitle {
-                font-size: 2.5rem;
-            }
-        }
         .buttonsBox {
             grid-row: 1;
             width: 100%;
@@ -252,18 +198,9 @@ $pink-color: rgb(255, 0, 234);
                 }
             }
         }
-        .patchNotesBox {
-            grid-row: 3;
-            width: 100%;
-            font-size: 1rem;
-
-            .panelTitle {
-                font-size: 2.5rem;
-            }
-        }
     }
 }
-@media (min-width: 700px) and (max-width: 1365px) {
+@media (min-width: 700px) and (max-width: 1499px) {
     .container {
         overflow-y: auto;
     }
@@ -281,16 +218,6 @@ $pink-color: rgb(255, 0, 234);
         grid-template-rows: 18rem 32rem;
         width: 100%;
 
-        .rankingBox {
-            grid-row: 2;
-            grid-column: 1/2;
-            width: 100%;
-            font-size: 2.5rem;
-
-            .panelTitle {
-                font-size: 2.8rem;
-            }
-        }
         .buttonsBox {
             grid-row: 1;
             grid-column: 1/3;
@@ -306,20 +233,10 @@ $pink-color: rgb(255, 0, 234);
                 }
             }
         }
-        .patchNotesBox {
-            grid-row: 2;
-            grid-column: 2/3;
-            width: 100%;
-            font-size: 2.5rem;
-
-            .panelTitle {
-                font-size: 2.8rem;
-            }
-        }
     }
 }
 
-@media (min-width: 1366px) and (max-width: 1700px) {
+@media (min-width: 1500px) and (max-width: 1700px) {
     .title {
         margin: 4rem auto 6rem auto;
 

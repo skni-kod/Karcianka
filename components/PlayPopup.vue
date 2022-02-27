@@ -21,7 +21,7 @@
                                     class="nickname formInput"
                                     name="username"
                                     maxlength="15"
-                                    placeholder="Username"
+                                    placeholder="Nickname"
                                     required
                                 />
                             </fieldset>
@@ -57,7 +57,7 @@
                                     class="username formInput"
                                     name="username"
                                     maxlength="20"
-                                    placeholder="Nazwa użytkownika"
+                                    placeholder="Nickname"
                                     required
                                 />
                             </fieldset>
@@ -85,7 +85,7 @@
                                     class="confirmPassword formInput"
                                     name="confirmPassword"
                                     maxlength="30"
-                                    placeholder="Potwierdź hasło"
+                                    placeholder="Powtórz hasło"
                                     required
                                 />
                             </fieldset>
@@ -588,5 +588,154 @@ $red-color: rgb(255, 0, 0);
 .form-enter-active,
 .form-leave-active {
     transition: all 0.5s ease;
+}
+
+@media (min-width: 300px) and (max-width: 699px) {
+    .playPopup {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 15rem 1fr;
+        overflow-y: auto;
+
+        .gameSection {
+            grid-row: 1;
+            padding: 4rem 0 0 0;
+
+            .nickname {
+                margin: 0.5rem;
+                width: 80%;
+                font-size: 1.5rem;
+            }
+
+            .gameButton {
+                width: 80%;
+                letter-spacing: 0.5rem;
+            }
+        }
+
+        .accountSection {
+            grid-row: 2;
+            justify-content: unset;
+            .loginBox {
+                .loginForm {
+                    width: 80%;
+                    margin: 1rem 0 0 0;
+
+                    fieldset {
+                        margin: 1rem 0;
+                    }
+
+                    .formInput {
+                        font-size: 1.5rem;
+                    }
+
+                    .loginButton {
+                        height: 4rem;
+                        margin: 0.5rem 0;
+                        font-size: 1.5rem;
+                    }
+                }
+            }
+
+            .registerBox {
+                top: 0;
+
+                .registerForm {
+                    width: 80%;
+                    margin: 1rem 0 0 0;
+
+                    fieldset {
+                        margin: 1rem 0;
+                    }
+
+                    .formInput {
+                        font-size: 1.5rem;
+                    }
+
+                    .registerButton {
+                        height: 4rem;
+                        margin: 0.5rem 0;
+                        font-size: 1.5rem;
+                    }
+                }
+            }
+        }
+
+        .text {
+            width: 40%;
+            text-transform: uppercase;
+            letter-spacing: 0.1rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        .toRegisterButton {
+            width: 80%;
+            height: 4rem;
+            margin: 0.5rem;
+            font-size: 1.5rem;
+            letter-spacing: 0.15rem;
+        }
+    }
+    .closePopup {
+        width: 2rem;
+        height: 2rem;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 1365px) {
+    .playPopup {
+        .gameSection {
+            .nickname {
+                width: 90%;
+                font-size: 1.4rem;
+            }
+
+            .gameButton {
+                width: 90%;
+                font-size: 1.7rem;
+                letter-spacing: 0.3rem;
+            }
+        }
+        .loginBox {
+            .loginForm {
+                width: 90%;
+
+                .formInput {
+                    font-size: 1.7rem;
+                }
+
+                .loginButton {
+                    height: 4rem;
+                    font-size: 1.7rem;
+                }
+            }
+        }
+        .registerBox {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: absolute;
+
+            .registerForm {
+                width: 90%;
+
+                .formInput {
+                    font-size: 1.4rem;
+                }
+
+                .registerButton {
+                    margin: 0.6rem 0;
+                    font-size: 1.6rem;
+                }
+            }
+        }
+        .toRegisterButton {
+            width: 90%;
+            margin: 0.6rem 0;
+            font-size: 1.6rem;
+        }
+    }
 }
 </style>

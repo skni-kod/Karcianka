@@ -17,14 +17,10 @@
     z-index: 1;
     position: relative;
     color: white;
+    font-size: 16px;
 }
 body {
     height: 100%;
     width: 100%;
-    background-image: url('@/assets/img/background/4127298.jpg');
-    background-size: 100%;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: repeat;
     cursor: pointer;
 }

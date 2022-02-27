@@ -3,7 +3,7 @@
         <div v-if="isAuth === false">
             <p>Nie jesteś zalogowany!</p>
         </div>
-        <div v-if="isAuth === true">
+        <div class="main" v-if="isAuth === true">
             <p>Dostęp przyznany</p>
         </div>
     </div>
@@ -12,10 +12,11 @@
 export default {
     data: () => {
         return {
-            isAuth: false,
+            isAuth: true,
         }
     },
-    mounted() {
+    /*
+        mounted() {
         if (process.client) {
             if (localStorage.getItem('token') !== null) {
                 fetch('http://localhost:5000/auth', {
@@ -35,5 +36,12 @@ export default {
         console.log(this.isAuth)
         //if (this.isAuth === false) this.$router.push('/')
     },
+     */
 }
 </script>
+<style lang="scss" scoped>
+.main {
+    width: 100%;
+    height: 100vh;
+}
+</style>

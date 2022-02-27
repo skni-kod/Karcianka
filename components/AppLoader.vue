@@ -34,7 +34,7 @@ export default {
     z-index: 100;
     background: rgb(0, 22, 82);
     color: white;
-    font-size: 10em;
+    font-size: 10rem;
     text-transform: uppercase;
     display: flex;
     justify-content: center;
@@ -42,9 +42,9 @@ export default {
 
     .circle {
         z-index: 100;
-        width: 1em;
-        height: 1em;
-        border: 0.1em solid rgb(230, 230, 230);
+        width: 8rem;
+        height: 8rem;
+        border: 0.8rem solid rgb(230, 230, 230);
         border-radius: 50%;
         border-color: transparent rgb(230, 230, 230) transparent
             rgb(230, 230, 230);

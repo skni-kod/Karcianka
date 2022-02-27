@@ -277,4 +277,43 @@ export default {
 .rulesLists-leave {
     opacity: 1;
 }
+@media (min-width: 300px) and (max-width: 699px) {
+}
+
+@media (min-width: 700px) and (max-width: 1365px) {
+    .rulesPopup {
+        .header {
+            .title {
+                font-size: 2.2rem;
+            }
+        }
+
+        .rulesContainer {
+            .gameList {
+                .list {
+                    top: 4rem;
+
+                    .listElement {
+                        height: 4rem;
+                        font-size: 1.8rem;
+                    }
+                }
+            }
+
+            .rulesContent {
+                .rule {
+                    .gameTitle {
+                        font-size: 2rem;
+                        letter-spacing: 0.1rem;
+                    }
+
+                    .rulesList {
+                        padding: 0 2rem 0 0;
+                        top: 4rem;
+                    }
+                }
+            }
+        }
+    }
+}
 </style>
