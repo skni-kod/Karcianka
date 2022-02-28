@@ -1,11 +1,15 @@
 <template>
     <transition>
-        <div class="rulesPopup" v-if="open" onselectstart="return false;">
+        <div
+            class="rulesPopup"
+            v-if="$store.state.showRulesPopup"
+            onselectstart="return false;"
+        >
             <div class="header">
                 <p class="title">Zasady gier</p>
                 <div
                     class="closePopup"
-                    @click="$emit('close-rules-popup')"
+                    @click="$store.dispatch('closeRulesPopup')"
                 ></div>
             </div>
             <div class="rulesContainer">
@@ -144,7 +148,7 @@
 <script>
 export default {
     props: ['open'],
-    data: () => {
+    data() {
         return {
             rulesDisplay: 1,
         }

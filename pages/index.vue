@@ -11,36 +11,35 @@
 
             <div class="buttonsBox">
                 <div class="box">
-                    <span class="button" @click="showPlayPopup = true"
+                    <span
+                        class="button"
+                        @click="$store.dispatch('showPlayPopup')"
                         >graj</span
                     >
                 </div>
 
                 <div class="box">
-                    <span class="button" @click="showRulesPopup = true">
+                    <span
+                        class="button"
+                        @click="$store.dispatch('showRulesPopup')"
+                    >
                         Zasady gry
                     </span>
                 </div>
 
                 <div class="box">
-                    <span class="button" @click="showRankingPopup = true">
+                    <span
+                        class="button"
+                        @click="$store.dispatch('showRankingPopup')"
+                    >
                         Rankingi Graczy
                     </span>
                 </div>
             </div>
             <LastestPatchNotes />
-            <PlayPopup
-                :open="showPlayPopup"
-                @close-play-popup="showPlayPopup = false"
-            />
-            <RankingPopup
-                :open="showRankingPopup"
-                @close-ranking-popup="showRankingPopup = false"
-            />
-            <RulesPopup
-                :open="showRulesPopup"
-                @close-rules-popup="showRulesPopup = false"
-            />
+            <PlayPopup />
+            <RankingPopup />
+            <RulesPopup />
         </div>
     </div>
 </template>
@@ -52,24 +51,10 @@ export default {
             title: 'CYBERKARTY',
         }
     },
-    data: () => {
-        return {
-            showPlayPopup: false,
-            showRankingPopup: false,
-            showRulesPopup: false,
-        }
-    },
 }
 </script>
 
 <style lang="scss" scoped>
-$white-color: rgb(236, 235, 235);
-$pink-color: rgb(255, 0, 234);
-$green-color: rgb(124, 255, 2);
-
-* {
-    font-size: 16px;
-}
 .container {
     position: fixed;
     top: 0;
@@ -92,18 +77,18 @@ $green-color: rgb(124, 255, 2);
 
     .whiteLetter {
         color: white;
-        text-shadow: 0 0 5px $white-color, 0 0 10px $white-color,
-            0 0 15px $white-color, 0 0 20px $white-color, 0 0 30px $white-color,
-            0 0 45px $white-color, 0 0 60px $white-color, 0 0 75px $white-color,
-            0 0 90px $white-color;
+        text-shadow: 0 0 5px var(--white), 0 0 10px var(--white),
+            0 0 15px var(--white), 0 0 20px var(--white), 0 0 30px var(--white),
+            0 0 45px var(--white), 0 0 60px var(--white), 0 0 75px var(--white),
+            0 0 90px var(--white);
     }
 
     .pinkLetter {
         color: rgb(194, 28, 172);
-        text-shadow: 0 0 3px $pink-color, 0 0 6px $pink-color,
-            0 0 15px $pink-color, 0 0 30px $pink-color, 0 0 45px $pink-color,
-            0 0 60px $pink-color, 0 0 75px $pink-color, 0 0 90px $pink-color,
-            0 0 120px $pink-color;
+        text-shadow: 0 0 3px var(--pink), 0 0 6px var(--pink),
+            0 0 15px var(--pink), 0 0 30px var(--pink), 0 0 45px var(--pink),
+            0 0 60px var(--pink), 0 0 75px var(--pink), 0 0 90px var(--pink),
+            0 0 120px var(--pink);
     }
 
     .flashAnimation {
@@ -139,8 +124,8 @@ $green-color: rgb(124, 255, 2);
 
             .button:hover {
                 color: rgb(94, 255, 0);
-                text-shadow: 0 0 5px $green-color, 0 0 10px $green-color,
-                    0 0 15px $green-color;
+                text-shadow: 0 0 5px var(--green), 0 0 10px var(--green),
+                    0 0 15px var(--green);
                 opacity: 1;
             }
         }

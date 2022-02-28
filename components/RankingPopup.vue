@@ -1,16 +1,21 @@
 <template>
     <transition>
-        <div class="rankingPopup" v-if="open" onselectstart="return false;">
+        <div
+            class="rankingPopup"
+            v-if="$store.state.showRankingPopup"
+            onselectstart="return false;"
+        >
             <p class="title">RankingPopup</p>
-            <div class="closePopup" @click="$emit('close-ranking-popup')"></div>
+            <div
+                class="closePopup"
+                @click="$store.dispatch('closeRankingPopup')"
+            ></div>
         </div>
     </transition>
 </template>
 
 <script>
-export default {
-    props: ['open'],
-}
+export default {}
 </script>
 
 <style lang="scss" scoped>
