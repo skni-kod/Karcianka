@@ -1,37 +1,64 @@
 export default {
-    // Global page headers: https://go.nuxtjs.dev/config-head
-    head: {
-        title: 'CardgameFrontEnd',
-        htmlAttrs: {
-            lang: 'en',
-        },
-        meta: [
-            { charset: 'utf-8' },
-            {
-                name: 'viewport',
-                content: 'width=device-width, initial-scale=1',
-            },
-            { hid: 'description', name: 'description', content: '' },
-            { name: 'format-detection', content: 'telephone=no' },
-        ],
-        link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+  // Client side rendering
+  ssr: false,
+  // Global page headers: https://go.nuxtjs.dev/config-head
+  head: {
+    title: 'CardgameFrontEnd',
+    htmlAttrs: {
+      lang: 'en',
     },
+    meta: [
+      { charset: 'utf-8' },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1',
+      },
+      { hid: 'description', name: 'description', content: '' },
+      { name: 'format-detection', content: 'telephone=no' },
+    ],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+  },
 
-    // Global CSS: https://go.nuxtjs.dev/config-css
-    css: ['@/assets/css/main.scss'],
+  // Global CSS: https://go.nuxtjs.dev/config-css
+  css: ['@/assets/css/main.scss'],
 
-    // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-    plugins: [],
+  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
+  plugins: [],
 
-    // Auto import components: https://go.nuxtjs.dev/config-components
-    components: true,
+  // Auto import components: https://go.nuxtjs.dev/config-components
+  components: {
+    path: '~/components', // will get any components nested in let's say /components/test too
+    pathPrefix: false,
+  },
 
-    // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-    buildModules: [],
+  axios: {
+    baseURL: process.env.API_URL | '', // Used as fallback if no runtime config is provided
+    retry: { retries: 3 },
+  },
 
-    // Modules: https://go.nuxtjs.dev/config-modules
-    modules: [],
+  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
+  buildModules: [],
 
-    // Build Configuration: https://go.nuxtjs.dev/config-build
-    build: {},
+  // Modules: https://go.nuxtjs.dev/config-modules
+  modules: ['@nuxtjs/axios', '@nuxtjs/auth-next'],
+
+  // nuxt auth options
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: 'login',
+            method: 'post',
+            propertyName: 'data.token',
+          },
+          user: { url: 'me', method: 'get', propertyName: 'data' },
+          logout: false,
+        },
+      },
+    },
+  },
+
+  // Build Configuration: https://go.nuxtjs.dev/config-build
+  build: {},
 }
