@@ -1,47 +1,27 @@
 <template>
     <div class="main">
-        <div v-if="isAuth === false">
-            <p>Nie jesteś zalogowany!</p>
-        </div>
-        <div class="main" v-if="isAuth === true">
+        <div class="main" v-if="$store.getters.getUserToken">
             <p>Dostęp przyznany</p>
+            <p>Witaj {{ $store.getters.getIsAuth }}</p>
+        </div>
+        <div v-else>
+            <p>Nie jesteś zalogowany!</p>
         </div>
     </div>
 </template>
 <script>
 export default {
-    data: () => {
-        return {
-            isAuth: true,
-        }
+    mounted() {
+        this.$store.dispatch('isAuth', this.$store.getters.getUserToken)
     },
-    /*
-        mounted() {
-        if (process.client) {
-            if (localStorage.getItem('token') !== null) {
-                fetch('http://localhost:5000/auth', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        token: localStorage.getItem('token'),
-                    }),
-                })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log(data)
-                        this.isAuth = true
-                    })
-            }
-        }
-        console.log(this.isAuth)
-        //if (this.isAuth === false) this.$router.push('/')
-    },
-     */
 }
 </script>
 <style lang="scss" scoped>
 .main {
     width: 100%;
     height: 100vh;
+    p {
+        color: black;
+    }
 }
 </style>

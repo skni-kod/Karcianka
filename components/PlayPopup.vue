@@ -18,12 +18,13 @@
             <div class="accountSection">
                 <transition name="form">
                     <div class="loginBox" v-if="!registerFormActive">
-                        <form class="loginForm">
+                        <form class="loginForm" @submit.prevent="loginUser">
                             <fieldset>
                                 <input
                                     type="text"
                                     class="nickname formInput"
                                     name="username"
+                                    v-model="username"
                                     maxlength="15"
                                     placeholder="Nickname"
                                     required
@@ -34,13 +35,17 @@
                                     type="password"
                                     class="password formInput"
                                     name="password"
+                                    v-model="passwd"
                                     maxlength="30"
                                     placeholder="Hasło"
                                     required
                                 />
                             </fieldset>
-                            <button class="loginButton" @click="loginUser">
+                            <button v-if="!logging" class="loginButton">
                                 Zaloguj się
+                            </button>
+                            <button v-else class="loginButton">
+                                Logowanie ...
                             </button>
                         </form>
                         <p class="text">lub</p>
@@ -139,8 +144,25 @@
 export default {
     props: ['open'],
     methods: {
-        async loginUser(e) {
-            e.preventDefault()
+        async loginUser() {
+            this.logging = true
+            this.$axios
+                .$post(`/login`, {
+                    username: this.username,
+                    passwd: this.passwd,
+                })
+                .then((response) => {
+                    this.successApi.push(response)
+                    console.log(this.successApi)
+                    this.$store.dispatch('setUserToken', response)
+                    this.logging = false
+                    this.$router.push('hub')
+                })
+                .catch((response) => {
+                    this.errorsApi.push(response)
+                    console.log(this.errorsApi)
+                    this.logging = false
+                })
         },
         async registerUser() {
             this.sending = true
@@ -175,6 +197,7 @@ export default {
             passwd: '',
             confirmPasswd: '',
             sending: false,
+            logging: false,
             successApi: [],
             errorsApi: [],
             registerFormActive: false,

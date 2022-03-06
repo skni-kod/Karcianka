@@ -1,4 +1,6 @@
 export default {
+    // Client side rendering
+    ssr: false,
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
         title: 'CardgameFrontEnd',
