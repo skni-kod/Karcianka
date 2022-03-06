@@ -1,233 +1,224 @@
 <template>
-    <div class="container" onselectstart="return false;">
-        <AppLoader />
-        <div class="title">
-            <span class="letter whiteLetter">cyber</span>
-            <span class="letter pinkLetter flashAnimation">karty</span>
-        </div>
-
-        <div class="main">
-            <TopPlayersList />
-
-            <div class="buttonsBox">
-                <div class="box">
-                    <span
-                        class="button"
-                        @click="$store.dispatch('showPlayPopup')"
-                        >graj</span
-                    >
-                </div>
-
-                <div class="box">
-                    <span
-                        class="button"
-                        @click="$store.dispatch('showRulesPopup')"
-                    >
-                        Zasady gry
-                    </span>
-                </div>
-
-                <div class="box">
-                    <span
-                        class="button"
-                        @click="$store.dispatch('showRankingPopup')"
-                    >
-                        Rankingi Graczy
-                    </span>
-                </div>
-            </div>
-            <LastestPatchNotes />
-            <PlayPopup />
-            <RankingPopup />
-            <RulesPopup />
-        </div>
+  <div class="container" onselectstart="return false;">
+    <AppLoader />
+    <div class="title">
+      <span class="letter whiteLetter">cyber</span>
+      <span class="letter pinkLetter flashAnimation">karty</span>
     </div>
+
+    <div class="main">
+      <TopPlayersList />
+
+      <div class="buttonsBox">
+        <div class="box">
+          <span class="button" @click="$store.dispatch('showPlayPopup')"
+            >graj</span
+          >
+        </div>
+
+        <div class="box">
+          <span class="button" @click="$store.dispatch('showRulesPopup')">
+            Zasady gry
+          </span>
+        </div>
+
+        <div class="box">
+          <span class="button" @click="$store.dispatch('showRankingPopup')">
+            Rankingi Graczy
+          </span>
+        </div>
+      </div>
+      <LastestPatchNotes />
+      <PlayPopup />
+      <RankingPopup />
+      <RulesPopup />
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-    head() {
-        return {
-            title: 'CYBERKARTY',
-        }
-    },
+  head() {
+    return {
+      title: 'CYBERKARTY',
+    }
+  },
 }
 </script>
 
 <style lang="scss" scoped>
 .container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgb(5, 5, 5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(5, 5, 5);
 }
 .title {
-    width: 100%;
-    text-align: center;
-    margin: 3rem auto 7rem auto;
+  width: 100%;
+  text-align: center;
+  margin: 3rem auto 7rem auto;
 
-    .letter {
-        font-family: NeonFontTitle;
-        font-size: 8.5rem;
-        text-transform: uppercase;
-        letter-spacing: 0.8rem;
-    }
+  .letter {
+    font-family: NeonFontTitle;
+    font-size: 8.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8rem;
+  }
 
-    .whiteLetter {
-        color: white;
-        text-shadow: 0 0 5px var(--white), 0 0 10px var(--white),
-            0 0 15px var(--white), 0 0 20px var(--white), 0 0 30px var(--white),
-            0 0 45px var(--white), 0 0 60px var(--white), 0 0 75px var(--white),
-            0 0 90px var(--white);
-    }
+  .whiteLetter {
+    color: white;
+    text-shadow: 0 0 5px var(--white), 0 0 10px var(--white),
+      0 0 15px var(--white), 0 0 20px var(--white), 0 0 30px var(--white),
+      0 0 45px var(--white), 0 0 60px var(--white), 0 0 75px var(--white),
+      0 0 90px var(--white);
+  }
 
-    .pinkLetter {
-        color: rgb(194, 28, 172);
-        text-shadow: 0 0 3px var(--pink), 0 0 6px var(--pink),
-            0 0 15px var(--pink), 0 0 30px var(--pink), 0 0 45px var(--pink),
-            0 0 60px var(--pink), 0 0 75px var(--pink), 0 0 90px var(--pink),
-            0 0 120px var(--pink);
-    }
+  .pinkLetter {
+    color: rgb(194, 28, 172);
+    text-shadow: 0 0 3px var(--pink), 0 0 6px var(--pink), 0 0 15px var(--pink),
+      0 0 30px var(--pink), 0 0 45px var(--pink), 0 0 60px var(--pink),
+      0 0 75px var(--pink), 0 0 90px var(--pink), 0 0 120px var(--pink);
+  }
 
-    .flashAnimation {
-        animation: letter_falsh 3.5s linear infinite;
-    }
+  .flashAnimation {
+    animation: letter_falsh 3.5s linear infinite;
+  }
 }
 
 .main {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows: 1fr;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 1fr;
 
-    .buttonsBox {
-        width: 100%;
-        grid-column: 2/3;
-        padding: 3rem 0 0 0;
+  .buttonsBox {
+    width: 100%;
+    grid-column: 2/3;
+    padding: 3rem 0 0 0;
 
-        .box {
-            width: 100%;
-            height: 6rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+    .box {
+      width: 100%;
+      height: 6rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-            * {
-                text-decoration: none;
-                text-transform: uppercase;
-                font-family: NeonFontButtons2;
-                letter-spacing: 0.1rem;
-                font-size: 3rem;
-                opacity: 0.1;
-            }
+      * {
+        text-decoration: none;
+        text-transform: uppercase;
+        font-family: NeonFontButtons2;
+        letter-spacing: 0.1rem;
+        font-size: 3rem;
+        opacity: 0.1;
+      }
 
-            .button:hover {
-                color: rgb(94, 255, 0);
-                text-shadow: 0 0 5px var(--green), 0 0 10px var(--green),
-                    0 0 15px var(--green);
-                opacity: 1;
-            }
-        }
+      .button:hover {
+        color: rgb(94, 255, 0);
+        text-shadow: 0 0 5px var(--green), 0 0 10px var(--green),
+          0 0 15px var(--green);
+        opacity: 1;
+      }
     }
+  }
 }
 
 @keyframes letter_falsh {
-    0%,
-    19.999%,
-    22%,
-    62.999%,
-    64%,
-    64.999%,
-    70%,
-    100% {
-        opacity: 0.99;
-    }
-    20%,
-    21.999%,
-    63%,
-    63.999%,
-    65%,
-    69.999% {
-        opacity: 0.4;
-    }
+  0%,
+  19.999%,
+  22%,
+  62.999%,
+  64%,
+  64.999%,
+  70%,
+  100% {
+    opacity: 0.99;
+  }
+  20%,
+  21.999%,
+  63%,
+  63.999%,
+  65%,
+  69.999% {
+    opacity: 0.4;
+  }
 }
 @media (min-width: 300px) and (max-width: 699px) {
-    .container {
-        overflow-y: auto;
-    }
-    .title {
-        margin: 2rem auto;
+  .container {
+    overflow-y: auto;
+  }
+  .title {
+    margin: 2rem auto;
 
-        .letter {
-            font-size: 3.5rem;
-            letter-spacing: 0.3rem;
-        }
+    .letter {
+      font-size: 3.5rem;
+      letter-spacing: 0.3rem;
     }
-    .main {
-        display: grid;
-        grid-template-rows: 14rem 30rem 30rem;
+  }
+  .main {
+    display: grid;
+    grid-template-rows: 14rem 30rem 30rem;
+    width: 100%;
+
+    .buttonsBox {
+      grid-row: 1;
+      width: 100%;
+
+      .box {
         width: 100%;
+        height: 4rem;
+        text-align: center;
 
-        .buttonsBox {
-            grid-row: 1;
-            width: 100%;
-
-            .box {
-                width: 100%;
-                height: 4rem;
-                text-align: center;
-
-                .button {
-                    font-size: 2rem;
-                }
-            }
+        .button {
+          font-size: 2rem;
         }
+      }
     }
+  }
 }
 @media (min-width: 700px) and (max-width: 1499px) {
-    .container {
-        overflow-y: auto;
-    }
-    .title {
-        margin: 3rem auto;
+  .container {
+    overflow-y: auto;
+  }
+  .title {
+    margin: 3rem auto;
 
-        .letter {
-            font-size: 6rem;
-            letter-spacing: 0.6rem;
-        }
+    .letter {
+      font-size: 6rem;
+      letter-spacing: 0.6rem;
     }
-    .main {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: 18rem 32rem;
+  }
+  .main {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 18rem 32rem;
+    width: 100%;
+
+    .buttonsBox {
+      grid-row: 1;
+      grid-column: 1/3;
+      width: 100%;
+
+      .box {
         width: 100%;
+        height: 5.2rem;
+        text-align: center;
 
-        .buttonsBox {
-            grid-row: 1;
-            grid-column: 1/3;
-            width: 100%;
-
-            .box {
-                width: 100%;
-                height: 5.2rem;
-                text-align: center;
-
-                .button {
-                    font-size: 3rem;
-                }
-            }
+        .button {
+          font-size: 3rem;
         }
+      }
     }
+  }
 }
 
 @media (min-width: 1500px) and (max-width: 1700px) {
-    .title {
-        margin: 4rem auto 6rem auto;
+  .title {
+    margin: 4rem auto 6rem auto;
 
-        .letter {
-            font-size: 7.5rem;
-        }
+    .letter {
+      font-size: 7.5rem;
     }
+  }
 }
 </style>
