@@ -356,6 +356,7 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/Classes/Card.cs"
 "Assets/Classes/Player.cs"
+"Assets/resource/jsonreader.cs"
 "Assets/Scripts/KeysInput.cs"
 "Assets/Scripts/Loader.cs"
 "Assets/Scripts/MainMenu.cs"

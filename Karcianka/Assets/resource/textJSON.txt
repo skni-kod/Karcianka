@@ -1,0 +1,13 @@
+{
+    "card": [
+        {
+            "name": "Warrior"
+        },
+        {
+            "name": "Mage"
+        },
+        {
+            "name": "Archer"
+        }
+    ]
+}
