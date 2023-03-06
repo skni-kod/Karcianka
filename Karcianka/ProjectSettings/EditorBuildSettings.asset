@@ -4,5 +4,23 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/StartScreenScene.unity
+    guid: edc574d6e47a9484da7dc90a56d0f5dc
+  - enabled: 1
+    path: Assets/Scenes/Menu/MenuScene.unity
+    guid: 84326ebba88111946af042fd8460990a
+  - enabled: 1
+    path: Assets/Scenes/Menu/CardsShopScene.unity
+    guid: a0fb4e8921c2e674e9721e5e76ee1e27
+  - enabled: 1
+    path: Assets/Scenes/Menu/ChestsShopScene.unity
+    guid: dc46dc59a8f1b1f4fab0eae5f56265b5
+  - enabled: 1
+    path: Assets/Scenes/Menu/DecksScene.unity
+    guid: d2b887ce3f54c0649b3e4c41b564c32a
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: 6cba55e7f2b1eb148a0f2ac73f327f99
   m_configObjects: {}
