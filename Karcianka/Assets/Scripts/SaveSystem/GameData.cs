@@ -4,8 +4,10 @@ using System;
 public class GameData
 {
     public DateTime dateTime;
-    public GameData()
+    public string nickname;
+    public GameData(string nickname)
     {
         dateTime = DateTime.Now;
+        this.nickname = nickname;
     }
 }

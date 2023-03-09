@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Collections.Generic;
 
 public class SaveGameManager : MonoBehaviour
 {
@@ -31,10 +32,11 @@ public class SaveGameManager : MonoBehaviour
             Directory.CreateDirectory(savesPath);
         }
     }
-    public void createGameSave(string saveName)
+    public void createGameSave(string username)
     {
-        GameData data = new GameData();
-        string filePath = savesPath + saveName + ".save";
+        GameData data = new GameData(username);
+        string fileName = "game" + (Directory.GetFiles(savesPath, "*.save").Length);
+        string filePath = savesPath + fileName + ".save";
         try
         {
             using (FileStream stream = new FileStream(filePath, FileMode.Create))
@@ -48,6 +50,7 @@ public class SaveGameManager : MonoBehaviour
             Debug.LogError(e.Message);
         }
     }
+    //TODO: Poprawiæ zapisywanie gry
     public void saveGame(string saveName,GameData data)
     {
         formatter = new BinaryFormatter();
@@ -65,6 +68,7 @@ public class SaveGameManager : MonoBehaviour
             Debug.LogError(e.Message);
         }
     }
+    //TODO: Poprawiæ wczytywanie zapisu gry
     public GameData loadGame(string saveName)
     {
         formatter = new BinaryFormatter();
@@ -96,7 +100,19 @@ public class SaveGameManager : MonoBehaviour
         {
             Debug.LogError(e.Message);
         }
-    } 
+    }
+    // TODO: poprawiæ funkcjê zwracaj¹c¹ dane o zapisach gry, kóre bêd¹ wyœwietlane w panelu zapisów
+    public List<string> getGameSaves()
+    {
+        List<string> list = new List<string>();
+        DirectoryInfo directoryInfo = new DirectoryInfo(savesPath);
+        FileInfo[] gameSaveFiles = directoryInfo.GetFiles("*save");
+        foreach(var file in gameSaveFiles)
+        {
+            list.Add(file.Name);
+        }
+        return list;
+    }
     public bool savesExist()
     {
         return Directory.Exists(savesPath) && Directory.GetFiles(savesPath, "*.save").Length > 0;

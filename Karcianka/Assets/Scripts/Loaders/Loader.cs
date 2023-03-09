@@ -1,18 +1,25 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class Loader : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject loadingScreen;
+    public Slider slider;
+    public void loadScene(int sceneId)
     {
-        
+        StartCoroutine(LoadAsynchronously(sceneId));
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator LoadAsynchronously(int sceneId)
     {
-        
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneId);
+        loadingScreen.SetActive(true);
+        while (!operation.isDone)
+        {
+            float progrss = Mathf.Clamp01(operation.progress / .9f);
+            slider.value = progrss;
+            yield return null;
+        }
     }
 }
