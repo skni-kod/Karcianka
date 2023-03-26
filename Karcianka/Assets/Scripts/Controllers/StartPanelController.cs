@@ -1,13 +1,16 @@
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+
+
 
 public class StartPanelController : MonoBehaviour
 {
     private GameManager gameManager;
     private SaveGameManager saveGameManager;
     private GameObject[] panels;
+    private short activePanel;
+    [SerializeField] private GameObject savesArea;
 
     // Start is called before the first frame update
     private void Start()
@@ -19,6 +22,7 @@ public class StartPanelController : MonoBehaviour
             .Select(t => t.gameObject).ToArray();
 
         panels[0].SetActive(true);
+        activePanel = 0;
         for (int i = 1; i < panels.Length; i++)
         {
             panels[i].SetActive(false);
@@ -36,56 +40,30 @@ public class StartPanelController : MonoBehaviour
     { 
         if (Input.GetKeyDown(KeyCode.Space) && panels[0].activeSelf)
         {
-            changePanelActiveUp(0);
+            changePanelActiveUp();
         }  
     }
     // Change active panel
-    private void changePanelActiveUp(int index)
+    public void changePanelActiveUp()
     {
-        panels[index].SetActive(false);
-        panels[index+1].SetActive(true);
+        panels[activePanel].SetActive(false);
+        panels[activePanel + 1].SetActive(true);
+        activePanel++;
     }
-    private void changePanelActiveDown(int index)
+    public void changePanelActiveDown()
     {
-        panels[index].SetActive(false);
-        panels[index - 1].SetActive(true);
+        panels[activePanel].SetActive(false);
+        panels[activePanel - 1].SetActive(true);
+        activePanel--;
     }
+
     public void onSingleplayerButtonClick()
     {
-        changePanelActiveUp(1);
-        Button[] buttons = panels[1].GetComponentsInChildren<Button>(includeInactive: true);
-        TMP_Text noSavesText = GameObject.Find("NoSavesText").GetComponent<TMP_Text>();
-        buttons[1].interactable = false;
-
-        if (!saveGameManager.savesExist()) { 
-            noSavesText.gameObject.SetActive(true);
-        }
-        else
-        {
-            noSavesText.gameObject.SetActive(false);
-            //TODO: Pobranie zapisów gry, wyœwyietlanie jako klikalne komponenty
-        }
+        changePanelActiveUp();
     }
 
-    public void onCreateButtonClicked()
-    {
-        changePanelActiveUp(2);
-    }
-    public void onDeleteButtonClicked()
-    {
-        //TODO: Dodaæ usuwanie wybranego zapsiu gry
-        saveGameManager.deleteGameSave("Test");
-    }
-    public void onBackButtonClicked()
-    {
-        changePanelActiveDown(3);
-    }
     public void onCreateSaveGameButtonClicked()
     {
-        //TODO: stworzenie zapisu gry, pobranie nickname
-        TMP_InputField input = panels[3].GetComponentInChildren<TMP_InputField>();
-        Loader loader = GameObject.Find("Loader").GetComponent<Loader>();
-        saveGameManager.createGameSave(input.text);
-        loader.loadScene(1);
+
     }
 }
