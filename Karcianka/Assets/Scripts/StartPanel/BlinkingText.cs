@@ -13,7 +13,10 @@ public class BlinkingText : MonoBehaviour
     {
         StartCoroutine(Blink());
     }
-
+    private void Awake()
+    {
+        StartCoroutine(Blink());
+    }
     private IEnumerator Blink()
     {
         if (text != null) {

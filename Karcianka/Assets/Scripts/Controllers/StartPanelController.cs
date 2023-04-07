@@ -4,19 +4,22 @@ using UnityEngine;
 
 
 
-public class StartPanelController : MonoBehaviour
+public class StartPanelController : Menu
 {
     private GameManager gameManager;
     private SaveGameManager saveGameManager;
     private GameObject[] panels;
     private short activePanel;
+    private Loader loader;
     [SerializeField] private GameObject savesArea;
+    [SerializeField] private TMP_InputField nicknameInput;
 
     // Start is called before the first frame update
     private void Start()
     {
         gameManager = GameManager.Instance;
         saveGameManager = gameManager.GetSaveGameManager();
+        loader = GameObject.Find("Loader").GetComponent<Loader>();
         panels = transform.GetComponentsInChildren<Transform>(includeInactive: true)
             .Where(t => t.parent == transform)
             .Select(t => t.gameObject).ToArray();
@@ -52,9 +55,12 @@ public class StartPanelController : MonoBehaviour
     }
     public void changePanelActiveDown()
     {
-        panels[activePanel].SetActive(false);
-        panels[activePanel - 1].SetActive(true);
-        activePanel--;
+        if (activePanel > 0)
+        {
+            panels[activePanel].SetActive(false);
+            panels[activePanel - 1].SetActive(true);
+            activePanel--;
+        }
     }
 
     public void onSingleplayerButtonClick()
@@ -64,6 +70,10 @@ public class StartPanelController : MonoBehaviour
 
     public void onCreateSaveGameButtonClicked()
     {
-
+        if (nicknameInput.text.Length > 0)
+        {
+            saveGameManager.NewGame(nicknameInput.text);
+            loader.loadScene(1);
+        }
     }
 }

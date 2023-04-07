@@ -42,4 +42,12 @@ public class GameManager : MonoBehaviour
     {
         return saveGameManager;
     }
+    public void setGameData(GameData newGameData)
+    {
+        gameData = newGameData;
+    }
+    public GameData getGameData()
+    {
+        return gameData;
+    }
 }

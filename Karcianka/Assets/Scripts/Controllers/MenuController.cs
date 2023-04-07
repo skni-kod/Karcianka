@@ -1,27 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MenuController : MonoBehaviour
 {
     private GameManager gameManager;
     private Loader loader;
+    [SerializeField] TMP_Text username;
 
     // Start is called before the first frame update
     private void Start()
     {
-        gameManager = GameManager.Instance;
-        loader = GameObject.Find("Loader").GetComponent<Loader>();
+        setup();
     }
     private void Awake()
     {
-        gameManager = GameManager.Instance;
-        loader = GameObject.Find("Loader").GetComponent<Loader>();
+        setup();
     }
     // Update is called once per frame
     private void Update()
     {
         
+    }
+    private void setup()
+    {
+        gameManager = GameManager.Instance;
+        loader = GameObject.Find("Loader").GetComponent<Loader>();
+        username.text = gameManager.getGameData().nickname;
     }
     public void onPlayButtonClicked()
     {
@@ -45,6 +49,6 @@ public class MenuController : MonoBehaviour
     }
     public void onExitButtonClicked()
     {
-
+        Application.Quit();
     }
 }

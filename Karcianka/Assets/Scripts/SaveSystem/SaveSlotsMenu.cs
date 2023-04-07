@@ -4,11 +4,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SaveSlotsMenu : MonoBehaviour
+public class SaveSlotsMenu : Menu
 {
     private SaveSlot[] slots;
     private Button[] buttons;
-    private bool allSlotsNoData = true;
 
     private void Start()
     {
@@ -28,22 +27,6 @@ public class SaveSlotsMenu : MonoBehaviour
             GameData data = null;
             slotsData.TryGetValue(slot.getSaveId(), out data);
             slot.setData(data);
-            if (slot.hasSlotData())
-            {
-                allSlotsNoData = false;
-            }
-        }
-        setSlotSelected();
-    }
-    private void setSlotSelected()
-    {
-        if (allSlotsNoData)
-        {
-            EventSystem.current.SetSelectedGameObject()
-        }
-        else
-        {
-
         }
     }
 }

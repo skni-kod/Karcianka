@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Windows;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class SaveSlot : MonoBehaviour
 {
@@ -12,7 +11,17 @@ public class SaveSlot : MonoBehaviour
     [SerializeField] private GameObject dataHas;
     [SerializeField] private TextMeshProUGUI nickname;
     [SerializeField] private TextMeshProUGUI date;
+    [SerializeField] private Button deleteBtn;
+
+    private Loader loader;
+    private bool firstClick;
     private bool hasData;
+
+    private void Start()
+    {
+        loader = GameObject.Find("Loader").GetComponent<Loader>();
+        firstClick = true;
+    }
     public void setData(GameData data)
     {
         if (data == null)
@@ -31,13 +40,16 @@ public class SaveSlot : MonoBehaviour
     }
     public void onSlotClicked()
     {
+        SaveGameManager.instance.setSelectedSlotId(saveId);
+        deleteBtn.interactable = false;
         if (!hasData)
         {
-
+            startPanelController.changePanelActiveUp();
         }
         else if (hasData)
         {
-            
+            SaveGameManager.instance.LoadGame();
+            loader.loadScene(1);
         }
     }
     public string getSaveId()

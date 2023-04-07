@@ -48,7 +48,7 @@ public class SaveGameManager : MonoBehaviour
         gameData = fileDataHandler.Load(selectedSlotId);
         if (gameData != null)
         {
-
+            GameManager.Instance.setGameData(gameData);
         }
     }
     public void SaveGame()
